@@ -22,20 +22,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.14</source>
                     <target>1.14</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
                     <compilerArgs>
                         <arg>-J-XX:+ShowCodeDetailsInExceptionMessages</arg>
                     </compilerArgs>
+                    <!-- CS61B 用 ${project.basedir} 当源码根目录：告诉 JDT 排除 src/，
+                         否则 m2e 加进来的 src/main/resources 会触发 "Cannot nest" 配置失败 -->
+                    <excludes>
+                        <exclude>src/**</exclude>
+                    </excludes>
+                    <testExcludes>
+                        <exclude>src/**</exclude>
+                    </testExcludes>
                 </configuration>
             </plugin>
         </plugins>
